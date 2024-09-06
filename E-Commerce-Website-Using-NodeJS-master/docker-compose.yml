@@ -1,0 +1,55 @@
+version: '3.9'
+
+services:
+  frontend:
+    image: node:14
+    container_name: ecommerce-webapp
+    working_dir: /app
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    command: "npm install && npm start"
+
+  backend-db:
+    image: mongo:5.0
+    container_name: mongodb
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+
+  mongo-interface:
+    image: mongo-express:latest
+    container_name: mongo-interface
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: Group28
+      ME_CONFIG_MONGODB_SERVER: backend-db
+    ports:
+      - "8081:8081"
+    networks:
+      - app-network
+
+  nginx-proxy:
+    image: nginx:alpine
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - app-network
+    depends_on:
+      - frontend
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
