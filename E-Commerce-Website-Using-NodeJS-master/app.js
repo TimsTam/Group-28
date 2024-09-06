@@ -16,13 +16,11 @@ const cartRoutes = require('./routes/cart/cart');
 
 
 
-mongoose.connect('mongodb://mongo:27017/shopping-cart',  
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-        useCreateIndex:true
-    })
+mongoose.connect('mongodb://admin:pass@mongo:27017/shopping-cart', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
     .then(() => {
         console.log("Database Connected");
     })
