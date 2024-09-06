@@ -1,19 +1,20 @@
-# Frontend Dockerfile
+# Use an official Node.js runtime as a parent image
 FROM node:14
 
-# Create app directory
+# Set the working directory in the container
 WORKDIR /usr/src/app
 
-# Install app dependencies
+# Copy package.json and package-lock.json to install dependencies
 COPY package*.json ./
 
+# Install dependencies
 RUN npm install
 
-# Bundle app source
+# Copy the current directory contents into the container
 COPY . .
 
-# Expose the necessary port for the app
+# Expose the port the app runs on
 EXPOSE 3000
 
-# Start the Node.js app
-CMD [ "npm", "start" ]
+# Command to run the app
+CMD ["npm", "start"]
