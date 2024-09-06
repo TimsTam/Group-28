@@ -1,22 +1,19 @@
 # Frontend Dockerfile
+FROM node:14
 
-# Use an official Node.js runtime as a parent image
-FROM node:18-alpine
-
-# Create and set the working directory
+# Create app directory
 WORKDIR /usr/src/app
 
-# Copy package.json and package-lock.json (if available)
+# Install app dependencies
 COPY package*.json ./
 
-# Install dependencies (use npm ci for cleaner install in CI/CD environments)
-RUN npm ci --only=production
+RUN npm install
 
-# Copy the rest of the application code
+# Bundle app source
 COPY . .
 
-# Expose the port the app runs on
+# Expose the necessary port for the app
 EXPOSE 3000
 
-# Start the app
-CMD ["node", "app.js"]
+# Start the Node.js app
+CMD [ "npm", "start" ]
