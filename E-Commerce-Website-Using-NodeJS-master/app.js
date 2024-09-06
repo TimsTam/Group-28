@@ -16,14 +16,24 @@ const cartRoutes = require('./routes/cart/cart');
 
 
 
-mongoose.connect('mongodb://admin:pass@mongo:27017/shopping-cart', {
+mongoose.connect('mongodb://admin:pass@localhost:27017/admin', {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-.then(() => {
+    useUnifiedTopology: true
+}).then(async () => {
     console.log("Database Connected");
-})
-.catch(err => {
+
+    const db = mongoose.connection.db;
+    
+    // Create a new user
+    await db.command({
+        createUser: "admin",
+        pwd: "pass",
+        roles: [{ role: "readWrite", db: "shopping-cart" }]
+    });
+
+    console.log("User Created Successfully");
+
+}).catch(err => {
     console.log("DB Not Connected");
     console.log(err);
 });
