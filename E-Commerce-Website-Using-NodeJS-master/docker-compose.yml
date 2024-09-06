@@ -11,16 +11,22 @@ services:
     networks:
       - frontend
       - backend
+    environment:
+      - MONGO_URI=mongodb://admin:pass@mongo:27017/shopping-cart?authSource=admin
 
   mongo:
     container_name: mongo
-    image: mongo:latest
+    image: mongo:4.2
     volumes:
       - mongodata:/data/db
     ports:
       - "27017:27017"
     networks:
       - backend
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+      - MONGO_INITDB_DATABASE=shopping-cart
 
   mongo-express:
     container_name: mongo-express
