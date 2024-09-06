@@ -17,17 +17,17 @@ const cartRoutes = require('./routes/cart/cart');
 
 
 mongoose.connect('mongodb://admin:pass@mongo:27017/shopping-cart', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+.then(() => {
+    console.log("Database Connected");
+})
+.catch(err => {
+    console.log("DB Not Connected");
+    console.log(err);
 });
 
-    .then(() => {
-        console.log("Database Connected");
-    })
-    .catch(err => {
-        console.log("DB Not Connected");
-        console.log(err);
-    })
 
 
 app.set('view engine', 'ejs');
