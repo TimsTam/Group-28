@@ -16,8 +16,13 @@ const cartRoutes = require('./routes/cart/cart');
 
 
 
+<<<<<<< HEAD
 mongoose.connect('mongodb://mongo:27017/shopping-cart',
 {
+=======
+mongoose.connect('mongodb://mongo:27017/shopping-cart', 
+    {
+>>>>>>> 687d1dc847cc8a46451021660c909b502d9f878f
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
