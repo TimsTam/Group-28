@@ -1,4 +1,6 @@
-README for 2808 Project, Group 28
+## 2808 Project, (Group 28)
+
+---
 
 | Name | Student ID | Contribution |
 | ------| ----| ------|
